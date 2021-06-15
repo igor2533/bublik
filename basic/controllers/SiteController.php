@@ -63,7 +63,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $query = Products::find();
+
+        $pagination = new Pagination([
+        'defaultPageSize'  => 5,
+        'totalCount' => $query->count(),
+        ]);
+        
+        $products = $query->orderBy('name')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+        
+        
+        return $this->render('index',
+        [
+            'products' => $products,
+            'pagination' => $pagination,
+        ]
+         );
     }
 
     /**
