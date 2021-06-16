@@ -44,6 +44,17 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
       
     }
 
+    public function getUser()
+    {
+      if ($this->user === false) {
+    $this->user = Users::findOne(['username'=>$this->username, 
+                                  'pass'=>$this->pass]);
+      }
+           
+     return $this->user;
+   }
+
+
     public function login()
     {
         if ($this->validate()) {
