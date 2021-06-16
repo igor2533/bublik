@@ -44,7 +44,12 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
       
     }
 
-
+    public function login()
+    {
+        if ($this->validate()) {
+        return Yii::$app->user->login($this->getUser());
+        }
+    }
 
     /**
      * {@inheritdoc}
