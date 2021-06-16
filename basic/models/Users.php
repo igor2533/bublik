@@ -15,7 +15,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
 
-
+    public $user = false;
 
  // 5 abstact methods
     public static function findIdentity($id)
@@ -77,8 +77,20 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', 'pass'], 'required'],
-            [['username', 'pass'], 'string', 'max' => 255],
+            [['username', 'pass'], 'string', 'max' => 50],
+            ['pass', 'validatePassword'],
         ];
+    }
+
+
+public function validatePassword($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            if(!$this->getUser())
+            {
+           $this->addError($attribute, 'Неверный пароль');
+            } 
+        }
     }
 
     /**
