@@ -113,3 +113,61 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+/* my css */
+.request_cart {
+    text-align: center;
+    border: solid 1px #5cb85c;
+    margin: 10px;
+    padding: 10px;
+}
+.col-sm-4.kartochka>div {
+    text-align: center;
+    border: solid 1px #5cb85c;
+   
+    padding: 10px;
+}
+.col-sm-4.kartochka {
+    margin-top: 20px;
+}
+.row.title_cart_request {
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.row.price_cart_request {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    padding-bottom: 10px;
+}
+.row.username_kartocha {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.row.user_rating {
+    color: green;
+}
+
+div.username_profile {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.row.button_cart_request {
+    text-align: right;
+    margin-right: 20px;
+}
+.row.title_cart_request,.row.price_cart_request {
+    text-align: left;
+    margin-left: 20px;
+}
+.container.requests {
+    max-width: 750px;
+}

@@ -6,11 +6,17 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Products;
 use app\models\ProductsSearch;
+use app\models\Users;
+use app\models\EntryForm;
+use app\models\Request;
+use app\models\SignupForm;
+use yii\db\ActiveRecord;
 
 class SiteController extends Controller
 {
@@ -63,22 +69,33 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Products::find();
-
+        $query = Request::find();
+        $query_users = Users::find();
         $pagination = new Pagination([
-        'defaultPageSize'  => 5,
+        'defaultPageSize'  => 10,
         'totalCount' => $query->count(),
         ]);
+        $pagination_users = new Pagination([
+            'defaultPageSize'  => 10,
+            'totalCount' => $query_users->count(),
+            ]);
         
-        $products = $query->orderBy('name')
+        $requests = $query->orderBy('title')
         ->offset($pagination->offset)
         ->limit($pagination->limit)
         ->all();
         
+             
+        $users = $query_users->orderBy('username')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
         
         return $this->render('index',
         [
-            'products' => $products,
+            'users'   => $users,
+            'pagination_users' => $pagination_users,
+            'requests' => $requests,
             'pagination' => $pagination,
         ]
          );
@@ -95,12 +112,11 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $model = new Users();
+        if ($model->load(Yii::$app->request->post()) 
+            && $model->login()) {
             return $this->goBack();
         }
-
-        $model->password = '';
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -136,6 +152,17 @@ class SiteController extends Controller
         ]);
     }
 
+
+    public function actionAdmin()
+    {
+     
+        return $this->render('admin');
+    }
+
+
+     //registration
+    
+
     /**
      * Displays about page.
      *
@@ -145,4 +172,38 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+
+    public function actionEntry()
+    {
+        // $model = new EntryForm();
+
+        // if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        //     // данные в $model удачно проверены
+
+        //     // делаем что-то полезное с $model ...
+ 
+
+        //     // $request=new Request;
+        //     // $request->title = $model->title;
+        //     // $request->price = $model->price;
+        //     // // $post->createTime=time();
+        //     // $request->save();
+      
+
+        //     //return $this->render('entry-confirm', ['model' => $model]);
+        // } else {
+        //     // либо страница отображается первый раз, либо есть ошибка в данных
+        //     return $this->render('entry', ['model' => $model]);
+        // }
+    }
+
+
+
+
+
+
+
+
+
 }

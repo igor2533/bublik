@@ -3,16 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Products;
-use app\models\ProductsSearch;
+use app\models\Request;
+use app\models\RequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\EntryForm;
 
 /**
- * ProductsController implements the CRUD actions for Products model.
+ * RequestController implements the CRUD actions for Request model.
  */
-class ProductsController extends Controller
+class RequestController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,15 +31,12 @@ class ProductsController extends Controller
     }
 
     /**
-     * Lists all Products models.
+     * Lists all Request models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-
-
-        $searchModel = new ProductsSearch();
+        $searchModel = new RequestSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +46,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Displays a single Products model.
+     * Displays a single Request model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,20 +59,13 @@ class ProductsController extends Controller
     }
 
     /**
-     * Creates a new Products model.
+     * Creates a new Request model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-
-
-
-
-
-
-
     public function actionCreate()
     {
-        $model = new Products();
+        $model = new Request();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -86,7 +77,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Updates an existing Products model.
+     * Updates an existing Request model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,7 +97,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * Deletes an existing Products model.
+     * Deletes an existing Request model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -119,16 +110,42 @@ class ProductsController extends Controller
         return $this->redirect(['index']);
     }
 
+
+
+
+
+    public function actionRequests()
+    {
+        $model = new Request();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Добавлено");
+        }
+
+        return $this->render('mycreate', [
+            'model' => $model,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
     /**
-     * Finds the Products model based on its primary key value.
+     * Finds the Request model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Products the loaded model
+     * @return Request the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Products::findOne($id)) !== null) {
+        if (($model = Request::findOne($id)) !== null) {
             return $model;
         }
 

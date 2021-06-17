@@ -13,8 +13,8 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-
-
+    
+    public $file;
     public $user = false;
 
  // 5 abstact methods
@@ -79,20 +79,28 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['username', 'pass'], 'required'],
             [['username', 'pass'], 'string', 'max' => 50],
             ['pass', 'validatePassword'],
+            [['file'], 'file'],
         ];
     }
 
-
+//need fix
+//
+//
 public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
             if(!$this->getUser())
             {
-           $this->addError($attribute, 'Неверный пароль');
+                if (Yii::$app->user->id == null) {  $this->addError($attribute, 'Неверный пароль');}
+
+          
             } 
         }
     }
-
+//
+//
+//
+//need fix
     /**
      * {@inheritdoc}
      */
@@ -101,6 +109,7 @@ public function validatePassword($attribute, $params)
         return [
             'id' => 'ID',
             'username' => 'Username',
+            'level' => 'Level',
             'pass' => 'Pass',
         ];
     }
