@@ -16,7 +16,9 @@ use app\models\Users;
 use app\models\EntryForm;
 use app\models\Request;
 use app\models\SignupForm;
+
 use yii\db\ActiveRecord;
+
 
 class SiteController extends Controller
 {
@@ -59,8 +61,52 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'private-messages' => [
+                'class' => \vision\messages\actions\MessageApiAction::className()
+            ]
         ];
     }
+
+      //my requests
+
+      public function actionMyrequests()
+      {
+        $query_my_request = Request::find();
+        $requests = $query_my_request->having(['user' => Yii::$app->user->identity->id])->orderBy('date DESC')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+        //$query_responses = new Response();
+                  
+            // $responses = $query_responses->having(['id_request' => 8])->offset($pagination->offset)
+            // ->limit($pagination->limit)
+            // ->all();
+
+
+
+
+
+
+        return $this->render('my-requests',
+    [
+        'requests'   => $requests,
+        'response' =>  $responses,
+    ]);
+
+      }
+
+
+//action messages
+      public function actionMessages()
+    {
+     
+
+
+        return $this->render('messages');
+
+
+    }
+
 
     /**
      * Displays homepage.
@@ -80,7 +126,7 @@ class SiteController extends Controller
             'totalCount' => $query_users->count(),
             ]);
         
-        $requests = $query->orderBy('title')
+        $requests = $query->orderBy('date DESC')
         ->offset($pagination->offset)
         ->limit($pagination->limit)
         ->all();

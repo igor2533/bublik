@@ -169,5 +169,138 @@ div.username_profile {
     margin-left: 20px;
 }
 .container.requests {
-    max-width: 750px;
+    
+}
+.row.date_cart_request {
+    font-size: 12px;
+    font-weight: bold;
+    color: #5cb85c;
+    padding-bottom: 10px;
+    text-align: left;
+    margin-left: 20px;
+}
+.col-sm-6.title_request_single {
+    text-align: -webkit-auto;
+    font-size: 20px;
+    padding-left: 30px;
+    color: #34c01e;
+}
+.col-sm-6.price_request_single {
+    text-align: -webkit-auto;
+    font-size: 26px;
+    padding-left: 30px;
+    color: #d81e05;
+}
+.row.desc_request_single {
+    text-align: -webkit-auto;
+    font-size: 16px;
+    padding-left: 30px;
+    color: #000000;
+}
+.row.block_request_single {
+    border: solid 1px red;
+    padding: 13px;
+    background: #f7ffef;
+}
+.col-sm-6.price_request_single>span {
+    background: #5cb85c;
+    padding: 4px;
+    font-size: 16px;
+    color: white;
+}
+.col-sm-6.price_request_single {
+    text-align: right;
+}
+
+.main-message-container {
+    width: 100%!important;
+}
+div.main-message-container .layout-background {
+    background: #4caf50;
+}
+.friends.active {
+    background-color: #3cdc39;
+}
+.contact.friends {
+    background-color: #4caf50;
+}
+
+.message-thread.message-wrapper.clearfix {
+    width: 100%;
+}
+.list_users.message-user-list.friends-message-layout {
+    width: 100%;
+    background-color: white;
+}
+div#scrollbar3 {
+    width: 100%!important;
+}
+
+.overview {
+    width: 100%!important;
+}
+.viewport {
+    width: 100%!important;
+}
+.contact.friends {
+    float: left;
+    margin: 20px;
+    background: none;
+    border: solid 1px #4caf50;
+    padding: 10px;
+}
+.friends-name div {
+    font-size: 16px;
+    color: #000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.contact.friends.active {
+    background: #bdebbf;
+}
+.friends.active .friends-block:after {
+    display:none; 
+}
+.my-message .massage-cell {
+    text-align: right;
+    background: #b1edb4;
+}
+.row.block_response {
+    border: solid 1px green;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 20px;
+}
+.row.response_title {
+    font-size: 22px;
+    font-weight: bold;
+}
+.row.response_desc {
+    font-size: 15px;
+}
+.row.response_date span {
+    background: green;
+    padding: 3px;
+    color: white;
+}
+.row.response_date,.row.response_price {
+    text-align: right;
+}
+.row.response_price span {
+    font-weight: bold;
+    background: red;
+    color: white;
+    padding: 2px;
+}
+.row.response_price {
+    padding-top: 10px;
+}
+.row.response_timing {
+    text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+    color: green;
 }

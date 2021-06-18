@@ -18,12 +18,14 @@ $this->title = 'Test DB';
     
     foreach ($requests as $request) {?>
    
-
+   <div class="col-sm-4">
    <div class="row request_cart">
    <div class="row title_cart_request"><span><?php  echo $request->title; ?></span></div>
    <div class="row price_cart_request"><span><?php  echo $request->price; ?> рублей</span></div>
-   <div class="row button_cart_request"><button class="btn btn-success">Откликнуться</button></div>
+   <div class="row date_cart_request"><span>Дата: <?php  echo $request->date; ?></span></div>
+   <div class="row button_cart_request"><button onclick="window.location.href='/response/new?id=<?php  echo $request->id; ?>'" class="btn btn-success">Откликнуться</button></div>
    </div>
+    </div>
     <?php   }   ?>
 
     </div>

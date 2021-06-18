@@ -83,9 +83,22 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
+
+    public static function  getAll(){
+            
+        return Users::find()->all();
+    }
+
+ 
+
+
 //need fix
 //
 //
+
+
+
+
 public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {

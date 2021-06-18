@@ -12,6 +12,52 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+       //messages
+       'mymessages' => [
+        //Обязательно
+    'class'    => 'vision\messages\components\MyMessages',
+        //не обязательно
+        //класс модели пользователей
+        //по-умолчанию \Yii::$app->user->identityClass
+    'modelUser' => 'common\models\Users',
+        //имя контроллера где разместили action
+    'nameController' => 'site',
+        //не обязательно
+        //имя поля в таблице пользователей которое будет использоваться в качестве имени
+        //по-умолчанию username
+    'attributeNameUser' => 'username',
+        //не обязательно
+        //можно указать роли и/или id пользователей которые будут видны в списке контактов всем кто не подпадает 
+        //в эту выборку, при этом указанные пользователи будут и смогут писать всем зарегестрированным пользователям
+    'admins' => ['admin', 7],
+        //не обязательно
+        //включение возможности дублировать сообщение на email
+        //для работы данной функции в проектк должна быть реализована отправка почты штатными средствами фреймворка
+    'enableEmail' => true,
+        //задаем функцию для возврата адреса почты
+        //в качестве аргумента передается объект модели пользователя
+    'getEmail' => function($user_model) {
+        return $user_model->email;
+    },
+        //задаем функцию для возврата лого пользователей в списке контактов (для виджета cloud)
+        //в качестве аргумента передается id пользователя
+    'getLogo' => function($user_id) {
+        return Yii::$app->user->identity->logo;
+    },
+        //указываем шаблоны сообщений, в них будет передаваться сообщение $message
+    'templateEmail' => [
+        'html' => 'private-message-text',
+        'text' => 'private-message-html'
+    ],
+        //тема письма
+    'subject' => 'Private message'
+],
+      
+
+
+
+
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LHJJjknx-x4WW3N940PnRUVmsofQ2xCE',

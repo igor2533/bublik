@@ -3,18 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Request;
-use app\models\RequestSearch;
+use app\models\Response;
+use app\models\ResponseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\EntryForm;
-use app\models\Response;
-
+use app\models\Request;
+use app\models\Users;
 /**
- * RequestController implements the CRUD actions for Request model.
+ * ResponseController implements the CRUD actions for Response model.
  */
-class RequestController extends Controller
+class ResponseController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,12 +31,12 @@ class RequestController extends Controller
     }
 
     /**
-     * Lists all Request models.
+     * Lists all Response models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new RequestSearch();
+        $searchModel = new ResponseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,38 +46,26 @@ class RequestController extends Controller
     }
 
     /**
-     * Displays a single Request model.
+     * Displays a single Response model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
-
-        $query_my_responses = Response::find();
-        $responses = $query_my_responses->where(['id_request' => $id])->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'responses' => $responses
         ]);
     }
 
-
-
-    
-
     /**
-     * Creates a new Request model.
+     * Creates a new Response model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Request();
+        $model = new Response();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -91,10 +78,44 @@ class RequestController extends Controller
 
 
 
+    public function actionNew()
+    {
+      
+        
+       
+        $model = new Response();
+        $requests = Request::find();
+        $user = Users::getAll();
+    
+        $requests = $requests->having(['id' => '1'])->all();
+        $get_request = $_GET['id'];
+        $id_active_user = Yii::$app->user->getId();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+          foreach ($requests as $request) {
+              $request_user = $request->id;
+          }
+        //die($request_user);
+        return $this->render('new', [
+            'model' => $model,
+            'requests' =>  $requests,
+            'users' => $user,
+            $model->customer_id =  'jj',
+            $model->freelancer_id = $id_active_user , 
+            $model->id_request =  $get_request,
+        
+         
+        ]);
+    }
+   
+
+
 
 
     /**
-     * Updates an existing Request model.
+     * Updates an existing Response model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -114,7 +135,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Deletes an existing Request model.
+     * Deletes an existing Response model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -127,48 +148,16 @@ class RequestController extends Controller
         return $this->redirect(['index']);
     }
 
-
-
-
-
-    public function actionNew()
-    {
-        $model = new Request();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Добавлено");
-        }
-  
-        $date_today =  date("d.m.Y");
-        
-        $id_active_user = Yii::$app->user->getId();
-        return $this->render('mycreate', [
-            'model' => $model,
-            $model->user =  $id_active_user,
-            $model->date = $date_today
-              
-        ]);
-    }
-
-
-
-
-
-
-
-
-
-
     /**
-     * Finds the Request model based on its primary key value.
+     * Finds the Response model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Request the loaded model
+     * @return Response the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Request::findOne($id)) !== null) {
+        if (($model = Response::findOne($id)) !== null) {
             return $model;
         }
 

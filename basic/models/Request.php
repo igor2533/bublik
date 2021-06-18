@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "request".
  *
@@ -31,7 +32,7 @@ class Request extends ActiveRecord
     public function rules()
     {
         return [
-            [['user'], 'required'],
+         
             [['title', 'price', 'description', 'date'], 'string'],
             [['user'], 'string', 'max' => 255],
         ];

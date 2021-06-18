@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\ActiveField;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Request */
@@ -11,19 +13,22 @@ use yii\widgets\ActiveForm;
 <div class="request-form">
 
     <?php $form = ActiveForm::begin(); ?>
+<?php  ?>
+    <?= $form->field($model, 'user')->hiddenInput(['hidden' => true ,'maxlength' => true, 'value' => $model->user])->label(false) ?>
 
-    <?= $form->field($model, 'user')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textarea(['rows' => 6])->label('Заголовок') ?>
 
-    <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'price')->input(['rows' => 6])->label('Цена')  ?>
 
-    <?= $form->field($model, 'price')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6])->label('Описание')  ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'date')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'date')->hiddenInput(['hidden' => true ,'maxlength' => true, 'value' => $model->date])->label(false) ?>
+
+
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
