@@ -3,17 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Response;
-use app\models\ResponseSearch;
+use app\models\Orders;
+use app\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Request;
-use app\models\Users;
+
 /**
- * ResponseController implements the CRUD actions for Response model.
+ * OrdersController implements the CRUD actions for Orders model.
  */
-class ResponseController extends Controller
+class OrdersController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,12 @@ class ResponseController extends Controller
     }
 
     /**
-     * Lists all Response models.
+     * Lists all Orders models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ResponseSearch();
+        $searchModel = new OrdersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class ResponseController extends Controller
     }
 
     /**
-     * Displays a single Response model.
+     * Displays a single Orders model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,63 +58,26 @@ class ResponseController extends Controller
     }
 
     /**
-     * Creates a new Response model.
+     * Creates a new Orders model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Response();
+        $model = new Orders();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        $freelancer_id = $_POST['freelancer_id'];
         return $this->render('create', [
             'model' => $model,
+            $model->freelancer_id =  $freelancer_id,
         ]);
     }
-
-
-
-    public function actionNew()
-    {
-      
-        
-       
-        $model = new Response();
-        $requests = Request::find();
-        $user = Users::getAll();
-    
-        $requests = $requests->having(['id' => $_GET['id']])->all();
-        $get_request = $_GET['id'];
-        $id_active_user = Yii::$app->user->getId();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-          foreach ($requests as $request) {
-              $request_user = $request->id;
-          }
-        //die($request_user);
-        return $this->render('new', [
-            'model' => $model,
-            'requests' =>  $requests,
-            'users' => $user,
-            $model->customer_id =  'jj',
-            $model->freelancer_id = $id_active_user , 
-            $model->id_request =  $get_request,
-        
-         
-        ]);
-    }
-   
-
-
-
 
     /**
-     * Updates an existing Response model.
+     * Updates an existing Orders model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -135,7 +97,7 @@ class ResponseController extends Controller
     }
 
     /**
-     * Deletes an existing Response model.
+     * Deletes an existing Orders model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -149,15 +111,15 @@ class ResponseController extends Controller
     }
 
     /**
-     * Finds the Response model based on its primary key value.
+     * Finds the Orders model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Response the loaded model
+     * @return Orders the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Response::findOne($id)) !== null) {
+        if (($model = Orders::findOne($id)) !== null) {
             return $model;
         }
 

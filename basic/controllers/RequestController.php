@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\EntryForm;
 use app\models\Response;
+use app\models\Users;
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -37,12 +38,22 @@ class RequestController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new RequestSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      
+
+        $users = Users::getAll();
+        $query_requests = Request::find();
+        $requests = $query_requests->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+        // $searchModel = new RequestSearch();
+        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            // 'searchModel' => $searchModel,
+            // 'dataProvider' => $dataProvider,
+            'requests' => $requests,
+           
         ]);
     }
 
@@ -120,11 +131,19 @@ class RequestController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+    //     return $this->redirect(['index']);
+    // }
+
+    public function actionDelete($id){
+        $request = Request::findOne($id);
+        if($request->delete()){
+            return $this->redirect(['request/index']);
+            
+        }
     }
 
 
@@ -145,13 +164,39 @@ class RequestController extends Controller
         return $this->render('mycreate', [
             'model' => $model,
             $model->user =  $id_active_user,
-            $model->date = $date_today
+            $model->date = $date_today,
+            $model->status = 0,
               
         ]);
     }
 
 
 
+
+       //enable disable request in site
+       public function isAllowed(){
+                
+        return $this->status;
+        
+    }
+    //enable request in site
+    public function actionAllow($id){
+        $request= Request::findOne($id);
+        if($request->allow()){
+            return $this->redirect(['index']);
+        }
+        
+    }
+    
+    
+    // disable request in site
+     public function actionDisallow($id){
+        $request= Request::findOne($id);
+        if($request->disallow()){
+            return $this->redirect(['index']);
+        }
+        
+    }
 
 
 

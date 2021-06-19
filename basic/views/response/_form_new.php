@@ -16,13 +16,13 @@ use yii\widgets\ActiveForm;
   
     $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'customer_id')->input(['maxlength' => true, 'value' => $request->user])->label(false) ?>
+    <?= $form->field($model, 'customer_id')->hiddenInput(['maxlength' => true, 'value' => $request->user])->label(false) ?>
 
     <?= $form->field($model, 'id_request')->hiddenInput(['value' =>  $get_request])->label(false) ?>
 
     <?= $form->field($model, 'freelancer_id')->hiddenInput(['value' => $id_active_user ])->label(false) ?>
 
-    <?= $form->field($model, 'title')->textarea(['rows' => 6])->label('Заголовок') ?>
+    <?= $form->field($model, 'title')->input(['rows' => 6])->label('Заголовок') ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6])->label('Описание')  ?>
 

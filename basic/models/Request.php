@@ -35,6 +35,7 @@ class Request extends ActiveRecord
          
             [['title', 'price', 'description', 'date'], 'string'],
             [['user'], 'string', 'max' => 255],
+            [['user'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user' => 'id']],
         ];
     }
 
@@ -51,8 +52,48 @@ class Request extends ActiveRecord
             'user' => 'User',
             'title' => 'Title',
             'price' => 'Price',
+            'status' => 'Status',
             'description' => 'Description',
             'date' => 'Date',
         ];
     }
+
+
+//disable - enable request in site
+    public function isAllowed()
+    {
+         return $this->status;
+    }
+    
+    
+    public function allow(){
+        $this->status = 1;
+        return $this->save(false);
+    }
+    
+      public function disallow(){
+        $this->status = 0;
+        return $this->save(false);
+    }
+    
+
+
+//get user
+    // public function getUser()
+    // {
+    //     return $this->hasOne(Users::className(), ['id' => 'user']);
+    // }
+
+    public function getAuthor(){
+    
+        return $this->hasOne(Users::className(), ['id'=>'user']);
+        
+    }
+
+
+
+
+
+
+
 }

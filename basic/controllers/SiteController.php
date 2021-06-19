@@ -126,7 +126,7 @@ class SiteController extends Controller
             'totalCount' => $query_users->count(),
             ]);
         
-        $requests = $query->orderBy('date DESC')
+        $requests = $query->where(['status' => 1]) ->andWhere(['<>','user',Yii::$app->user->identity->id])->orderBy('date DESC')
         ->offset($pagination->offset)
         ->limit($pagination->limit)
         ->all();

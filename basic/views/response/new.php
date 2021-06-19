@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
 <div class="col-sm-6 title_request_single"><span> <?php echo $request->title; ?></span> </div>
 <div class="col-sm-6 price_request_single"><span> <?php echo $request->price; ?> рублей</span> </div>
+<div class="row date_request_single"><span>Дата: <?php echo $request->date; ?> </span> </div>
+<div class="row author_request_single"><a href="/users/profile?id=<?php echo $request->user; ?>"><span><?php echo $request->author->username; ?></span></a> </div>
 </div>
 
 

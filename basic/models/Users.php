@@ -1,7 +1,8 @@
 <?php
 
 namespace app\models;
-
+use yii\web\IdentityInterface;
+use \yii\db\ActiveRecord;
 use Yii;
 
 /**
@@ -28,6 +29,9 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->id;
     }
     
+   
+
+
     public static function 
     findIdentityByAccessToken($token, $type = null)
     {
@@ -43,6 +47,11 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
       
     }
+
+   
+    
+
+
 
     public function getUser()
     {

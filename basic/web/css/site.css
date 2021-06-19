@@ -161,12 +161,12 @@ div.username_profile {
 }
 
 .row.button_cart_request {
-    text-align: right;
-    margin-right: 20px;
+    text-align: center;
+  
 }
 .row.title_cart_request,.row.price_cart_request {
     text-align: left;
-    margin-left: 20px;
+    margin-left: 0px;
 }
 .container.requests {
     
@@ -176,8 +176,8 @@ div.username_profile {
     font-weight: bold;
     color: #5cb85c;
     padding-bottom: 10px;
-    text-align: left;
-    margin-left: 20px;
+    text-align: center;
+    margin-left: 00px;
 }
 .col-sm-6.title_request_single {
     text-align: -webkit-auto;
@@ -303,4 +303,60 @@ div#scrollbar3 {
     font-weight: bold;
     font-size: 17px;
     color: green;
+}
+.row.author_request_single {
+    margin-left: 30px;
+    font-size: 20px;
+    color:white;
+    font-weight: bold;
+    padding-bottom: 6px;
+}
+.row.author_request_single span {
+    background: red;
+    padding: 3px;
+}
+.row.author_request_single a {
+    text-decoration: none;
+    color: white;
+}
+.row.date_request_single {
+    text-decoration: none;
+    color: white;
+}
+
+.row.date_request_single {
+    margin-left: 30px;
+    font-size: 14px;
+    color:black;
+    font-weight: bold;
+    padding-bottom: 6px;
+}
+.row.response_author {
+    text-align: right;
+}
+.row.response_author a {
+    background: green;
+    color: white;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.row.response_author {
+    padding-top: 7px;
+}
+
+.row.title_cart_request {
+    height: 68px;
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+.row.title_cart_request {
+    float: left;
+    width: 100%;
+}
+.row.price_cart_request {
+    width: 100%;
+    text-align: center;
 }

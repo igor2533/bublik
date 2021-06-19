@@ -5,11 +5,10 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "response".
+ * This is the model class for table "orders".
  *
  * @property int $id
  * @property string $customer_id
- * @property string|null $id_request
  * @property string|null $freelancer_id
  * @property string|null $title
  * @property string|null $description
@@ -17,14 +16,14 @@ use Yii;
  * @property string|null $price
  * @property string|null $timing
  */
-class Response extends \yii\db\ActiveRecord
+class Orders extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'response';
+        return 'orders';
     }
 
     /**
@@ -33,12 +32,11 @@ class Response extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-         [['id_request', 'freelancer_id', 'title', 'description', 'date', 'price', 'timing'], 'string'],
+            [['customer_id'], 'required'],
+            [['freelancer_id', 'title', 'description', 'date', 'price', 'timing'], 'string'],
             [['customer_id'], 'string', 'max' => 255],
         ];
     }
-
-
 
     /**
      * {@inheritdoc}
@@ -48,7 +46,6 @@ class Response extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'customer_id' => 'Customer ID',
-            'id_request' => 'Id Request',
             'freelancer_id' => 'Freelancer ID',
             'title' => 'Title',
             'description' => 'Description',
@@ -57,19 +54,4 @@ class Response extends \yii\db\ActiveRecord
             'timing' => 'Timing',
         ];
     }
-
-
-    public function getAuthor(){
-    
-        return $this->hasOne(Users::className(), ['id'=>'freelancer_id']);
-        
-    }
-
-
-
-
 }
-
-
-
-

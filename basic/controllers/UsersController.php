@@ -83,15 +83,15 @@ class UsersController extends Controller
            $id_active_user = Yii::$app->user->getId();
            $model_where_user_active = Users::findOne($id_active_user);
            $model_where_user_active = $model_where_user_active->level;
-          if($model_where_user_active == 1) {
+          //if($model_where_user_active == 1) {
 
         return $this->render('profile', [
             'model' => $this->findModel($id),
         ]);
-    }
-    else {
-        return $this->goHome();
-    }
+    //}
+    // else {
+    //     return $this->goHome();
+    // }
     }
 
 
