@@ -12,19 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'customer_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'customer_id')->hiddenInput(['maxlength' => true])->label(false) ?>
     <!-- need fix 19.06.2021 year -->
-    <?= $form->field($model, 'freelancer_id')->input([ 'value' =>  $model->freelancer_id ]) ?>
+    <?= $form->field($model, 'freelancer_id')->hiddenInput([ ])->label(false) ?>
 
-    <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'title')->hiddenInput(['rows' => 6])->label(false) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6])->label("Описание") ?>
 
-    <?= $form->field($model, 'date')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'date')->hiddenInput(['rows' => 6])->label(false) ?>
 
-    <?= $form->field($model, 'price')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'price')->input(['rows' => 6])->label('Цена') ?>
 
-    <?= $form->field($model, 'timing')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'timing')->hiddenInput(['rows' => 6])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -360,3 +360,26 @@ div#scrollbar3 {
     width: 100%;
     text-align: center;
 }
+a.create_order_a {
+    background: white;
+    border: solid 1px black;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+.row.order_block {
+    border: solid 1px #9ac83c;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #e8f9c5;
+}
+.title_order {
+    font-size: 20px;
+    font-weight: bold;
+}

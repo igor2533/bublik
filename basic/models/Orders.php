@@ -54,4 +54,21 @@ class Orders extends \yii\db\ActiveRecord
             'timing' => 'Timing',
         ];
     }
+
+
+
+    public function getAuthor(){
+    
+        return $this->hasOne(Users::className(), ['id'=>'freelancer_id']);
+        
+    }
+
+
+
+
+
+
+
+
+
 }

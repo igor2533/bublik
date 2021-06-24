@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
 <?php foreach ($responses as $response) {?>
 <div class="row block_response">
-    <form action="/orders/create" methor="post">
+
 <div class="row">
 <div class="col-sm-6">
  <div class="row response_title"><span><?php echo $response->title; ?></span> </div>   
@@ -60,15 +60,25 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row">
  <div class="row response_timing"><span>Сроки: <?php echo $response->timing; ?> дня(дней)</span> </div>
- <div class="row response_submit"><input type="submit" value="Выбрать и создать заказ"/> </div>
- <input type="text" name="freelancer_id" value="<?php echo $response->freelancer_id ;?>" />
- <div class="row response_author"><a href="/orders/create"><span>Выбрать этого исполнителя</span></a> </div>
+ <div class="row response_submit"><a class="create_order_a" href="/orders/create?freelancer_id=<?php echo $response->freelancer_id; ?>&title=<?php echo $response->title; ?>&timing=<?php echo $response->timing; ?>">Выбрать этого исполнителя</a> </div>
+
+
  
 </div>
-</form>
+
 
 </div>
 <?php }  ?>
+
+
+
+
+
+
+
+
+
+
 
 </div>
 

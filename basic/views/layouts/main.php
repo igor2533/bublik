@@ -43,6 +43,10 @@ AppAsset::register($this);
             ['label' => 'Мой профиль', 'url' => ['/users/profile?id='.Yii::$app->user->identity->id]],
             ['label' => 'Мои запросы', 'url' => ['/myrequests/']],
             ['label' => 'Чат', 'url' => ['/messages/']],
+            ['label' => 'Заказы', 'url' => ['/orders/index']],
+
+            
+
          
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

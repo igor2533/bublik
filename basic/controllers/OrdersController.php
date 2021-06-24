@@ -8,7 +8,7 @@ use app\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use app\models\Users;
 /**
  * OrdersController implements the CRUD actions for Orders model.
  */
@@ -38,9 +38,14 @@ class OrdersController extends Controller
         $searchModel = new OrdersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $orders = Orders::find();
+        $orders = $orders->where(['customer_id' =>Yii::$app->user->identity->id])->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+           'orders' => $orders,
         ]);
     }
 
@@ -69,10 +74,18 @@ class OrdersController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        $freelancer_id = $_POST['freelancer_id'];
+        $freelancer_id = $_GET['freelancer_id'];
+        $costumer_id = Yii::$app->user->identity->id;
+        $title = $_GET['title'];
+        $date_today =  date("d.m.Y");
+        $timing = $_GET['timing'];
         return $this->render('create', [
             'model' => $model,
             $model->freelancer_id =  $freelancer_id,
+            $model->title = $title,
+            $model->customer_id = $costumer_id,
+            $model->date = $date_today,
+            $model->timing =   $timing
         ]);
     }
 
